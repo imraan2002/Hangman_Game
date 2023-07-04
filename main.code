@@ -1,0 +1,30 @@
+import random
+import hang_image
+import word_file
+selected_word=random.choice(word_file.words)
+print(selected_word)
+display=[]
+for i in range(len(selected_word)):
+    display+='_'
+print(display)
+lives=6
+game_over=False
+while not game_over:
+    guessed_word = input("enter the letter:").lower()
+    for position in range(len(selected_word)):
+        letter = selected_word[position]
+        if letter == guessed_word:
+            display[position] = guessed_word
+    print(display)
+
+
+    if guessed_word not in selected_word:
+        lives-=1
+        if lives==0:
+            game_over=True
+            print("you lose")
+
+    if '_' not in display:
+        game_over=True
+        print("you won")
+    print(hang_image.stages[lives])
